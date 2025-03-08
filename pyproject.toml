@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling>=1.18.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "npm2rez"
+version = "0.0.1"
+description = "Convert npm packages to rez packages"
+authors = [
+    {name = "longhao", email = "hal.long@outlook.com"}
+]
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.scripts]
+npm2rez = "npm2rez.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/loonghao/npm2rez"
+Issues = "https://github.com/loonghao/npm2rez/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/npm2rez"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/npm2rez",
+    "tests",
+    "README.md",
+    "LICENSE",
+]

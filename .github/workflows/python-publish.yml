@@ -28,10 +28,18 @@ jobs:
       with:
         python-version: '3.x'
     - name: Install dependencies
+      shell: bash
       run: |
-        python -m pip install -r requirements-dev.txt
-        poetry --version
-        poetry build
+        python -m pip install uv
+        uv venv
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          source .venv/Scripts/activate
+        else
+          source .venv/bin/activate
+        fi
+        uv pip install -e .
+        uv --version
+        uv build
     # Note that we don't need credentials.
     # We rely on https://docs.pypi.org/trusted-publishers/.
     - name: Upload to PyPI
@@ -42,8 +50,8 @@ jobs:
       id: changelog
       uses: jaywcjlove/changelog-generator@main
       with:
-        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        filter-author: (|dependabot|renovate\\[bot\\]|dependabot\\[bot\\]|Renovate Bot)
+        token: ${{ secrets.GITHUB_TOKEN }}
+        filter-author: (|dependabot|renovate\[bot\]|dependabot\[bot\]|Renovate Bot)
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
         template: |
           ## Bugs
@@ -59,7 +67,7 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "dist/*"
-        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         body: |
           Comparing Changes: ${{ steps.changelog.outputs.compareurl }}
 
