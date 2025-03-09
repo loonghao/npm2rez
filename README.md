@@ -1,7 +1,7 @@
 # npm2rez
 
 <div align="center">
-    <img src="./logo.svg" alt="npm2rez Logo" width="200"/>
+    <img src="https://raw.githubusercontent.com/loonghao/npm2rez/master/logo.svg" alt="npm2rez Logo" width="200"/>
 </div>
 
 A tool to convert Node.js packages to rez packages for VFX and animation pipeline integration.

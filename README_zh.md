@@ -1,7 +1,7 @@
 # npm2rez
 
 <div align="center">
-    <img src="./logo.svg" alt="npm2rez Logo" width="200"/>
+    <img src="https://raw.githubusercontent.com/loonghao/npm2rez/master/logo.svg" alt="npm2rez Logo" width="200"/>
 </div>
 
 一个将 Node.js 包转换为 rez 包的工具，用于 VFX 和动画流水线集成。

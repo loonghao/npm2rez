@@ -20,3 +20,6 @@ target/*
 /build/
 /coverage.xml
 /.zip/
+/node_modules/
+/.venv/
+/dist/
