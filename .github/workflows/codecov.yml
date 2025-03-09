@@ -1,5 +1,13 @@
 name: Codecov
-on: [push, pull_request]
+
+# u53eau5728 push u5230 main u5206u652fu548c pull request u65f6u89e6u53d1
+# u8fd9u6837u53efu4ee5u907fu514du91cdu590du89e6u53d1u548cu6267u884c
+# u5982u679cu60a8u5e0cu671bu5728u6240u6709u5206u652fu4e0au90fdu89e6u53d1uff0cu53efu4ee5u6539u56de on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -8,28 +16,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Get repository name
-        id: repo-name
-        uses: MariachiBear/get-repo-name-action@v1.3.0
-        with:
-          with-owner: 'true'
-          string-case: 'uppercase'
+      
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install poetry
+          python -m pip install -r requirements-dev.txt
+          poetry --version
           poetry install
+      
       - name: Run tests and collect coverage
         run: |
           poetry run nox -s pytest
+      
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
-          slug: loonghao/${{ steps.repo-name.outputs.repository-name }}
           files: 'coverage.xml'
+          fail_ci_if_error: false
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
