@@ -3,7 +3,7 @@ name: Upload Python Package
 on:
   push:
     tags:
-      - "v*"  # 适配 Commitizen 的标签格式 v$version
+      - "[0-9]*.[0-9]*.[0-9]*"  # 适配不带 v 前缀的标签格式 $version
 
 jobs:
   deploy:
@@ -22,7 +22,7 @@ jobs:
     - uses: olegtarasov/get-tag@v2.1.4
       id: get_tag_name
       with:
-        tagRegex: "v(?<version>.*)"  # 提取不带 v 的版本号
+        tagRegex: "(?<version>.*)"  # 直接提取完整版本号
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -46,7 +46,7 @@ jobs:
       with:
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         filter-author: (|dependabot|renovate\[bot\]|dependabot\[bot\]|Renovate Bot)
-        filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+        filter: '[R|r]elease[d]\s+\d(\.\d+){0,2}'
         template: |
           ## Bugs
           {{fix}}

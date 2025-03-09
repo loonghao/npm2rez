@@ -61,12 +61,6 @@ jobs:
         run: |
           poetry run nox -s pytest
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage.xml
-          fail_ci_if_error: false
-
   # 单独的作业用于真实包测试，只在 Python 3.10 上运行
   real-package-tests:
     # 只在 Python 3.10 和 Ubuntu 上运行真实包测试
