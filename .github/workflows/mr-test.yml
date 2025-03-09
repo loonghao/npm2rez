@@ -32,7 +32,7 @@ jobs:
 
       # 缓存 Poetry 依赖
       - name: Cache Poetry dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
@@ -41,7 +41,7 @@ jobs:
 
       # 缓存 nox 环境
       - name: Cache nox environments
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .nox
           key: ${{ runner.os }}-nox-${{ matrix.python-version }}-${{ hashFiles('**/noxfile.py') }}-${{ hashFiles('**/nox_actions/**') }}
@@ -88,7 +88,7 @@ jobs:
 
       # 缓存 npm 包
       - name: Cache npm packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -97,7 +97,7 @@ jobs:
 
       # 缓存 Poetry 依赖
       - name: Cache Poetry dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-3.10-${{ hashFiles('**/poetry.lock') }}
@@ -106,7 +106,7 @@ jobs:
 
       # 缓存 nox 环境
       - name: Cache nox environments
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .nox
           key: ${{ runner.os }}-nox-3.10-${{ hashFiles('**/noxfile.py') }}-${{ hashFiles('**/nox_actions/**') }}
