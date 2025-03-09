@@ -40,6 +40,8 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         packages-dir: dist
+        verbose: true
+        print-hash: true
     - name: Generate changelog
       id: changelog
       uses: jaywcjlove/changelog-generator@main
