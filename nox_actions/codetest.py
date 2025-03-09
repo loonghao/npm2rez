@@ -12,11 +12,14 @@ def pytest(session: nox.Session) -> None:
     session.install(".")
     session.install("pytest", "pytest-cov", "pytest-mock")
     test_root = os.path.join(THIS_ROOT, "tests")
-    session.run("pytest", f"--cov={PACKAGE_NAME}",
-                "--cov-report=xml:coverage.xml",
-                f"--rootdir={test_root}",
-                "-k", "not test_install_",
-                env={"PYTHONPATH": THIS_ROOT.as_posix()})
+    session.run(
+        "pytest",
+        f"--cov={PACKAGE_NAME}",
+        "--cov-report=xml:coverage.xml",
+        f"--rootdir={test_root}",
+        "-k", "not test_install_",
+        env={"PYTHONPATH": THIS_ROOT.as_posix()}
+    )
 
 
 def pytest_real_packages(session: nox.Session) -> None:
@@ -24,11 +27,13 @@ def pytest_real_packages(session: nox.Session) -> None:
     session.install(".")
     session.install("pytest")
     test_root = os.path.join(THIS_ROOT, "tests")
-    session.run("pytest",
-                f"--rootdir={test_root}",
-                "-k", "test_install_",
-                "-v",
-                env={
-                    "PYTHONPATH": THIS_ROOT.as_posix(),
-                    "RUN_REAL_PACKAGE_TESTS": "1"
-                })
+    session.run(
+        "pytest",
+        f"--rootdir={test_root}",
+        "-k", "test_install_",
+        "-v",
+        env={
+            "PYTHONPATH": THIS_ROOT.as_posix(),
+            "RUN_REAL_PACKAGE_TESTS": "1"
+        }
+    )

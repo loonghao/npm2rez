@@ -43,13 +43,13 @@ uv pip install -e .
 
 ```bash
 # Run with uvx (recommended)
-uvx npm2rez --name typescript --version 4.9.5 --source npm --bin-name tsc --node-version 16.14.0
+uvx npm2rez --name typescript --version 4.9.5 --source npm --node-version 16.14.0
 
 # Or run directly
-npm2rez --name typescript --version 4.9.5 --source npm --bin-name tsc --node-version 16.14.0
+npm2rez --name typescript --version 4.9.5 --source npm --node-version 16.14.0
 
 # Create package from GitHub
-uvx npm2rez --name typescript --version 4.9.5 --source github --repo microsoft/TypeScript --bin-name tsc
+uvx npm2rez --name typescript --version 4.9.5 --source github --repo microsoft/TypeScript
 ```
 
 ### Command Line Arguments
