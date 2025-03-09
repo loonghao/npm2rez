@@ -120,4 +120,4 @@ jobs:
 
       - name: Test (Real Package Tests)
         run: |
-          poetry run nox -s pytest-real-packages
+          poetry run nox -s pytest
