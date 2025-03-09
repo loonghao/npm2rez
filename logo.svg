@@ -8,26 +8,26 @@
     </linearGradient>
   </defs>
   <circle cx="100" cy="100" r="90" fill="url(#bgGradient)" stroke="#e0e0e0" stroke-width="2"/>
-  
+
   <!-- npm 方块 - 添加阴影效果 -->
   <rect x="40" y="60" width="60" height="60" rx="8" ry="8" fill="#cb3837" filter="url(#shadow)"/>
-  
+
   <!-- rez 方块 - 添加阴影效果 -->
   <rect x="100" y="80" width="60" height="60" rx="8" ry="8" fill="#2c3e50" filter="url(#shadow)"/>
-  
+
   <!-- 阴影滤镜 -->
   <defs>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
       <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#00000033"/>
     </filter>
   </defs>
-  
+
   <!-- npm 文字 - 使用更现代的字体 -->
   <text x="45" y="100" font-family="'Segoe UI', -apple-system, sans-serif" font-size="24" font-weight="600" fill="#ffffff">npm</text>
-  
+
   <!-- rez 文字 - 使用更现代的字体 -->
   <text x="110" y="120" font-family="'Segoe UI', -apple-system, sans-serif" font-size="24" font-weight="600" fill="#ffffff">rez</text>
-  
+
   <!-- 现代化箭头 - 使用渐变色 -->
   <defs>
     <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -35,13 +35,13 @@
       <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:0.8" />
     </linearGradient>
   </defs>
-  
+
   <!-- 箭头路径 - 使用更流畅的曲线 -->
   <path d="M85 85 C95 82, 105 98, 115 95" stroke="url(#arrowGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
-  
+
   <!-- 箭头头部 - 使用更现代的设计 -->
   <polygon points="108,90 115,95 108,100" fill="#2c3e50" stroke="none"/>
-  
+
   <!-- npm2rez 文字 - 使用更现代的字体和样式 -->
   <text x="100" y="170" font-family="'Segoe UI', -apple-system, sans-serif" font-size="20" font-weight="600" fill="#333333" text-anchor="middle">npm2rez</text>
 </svg>

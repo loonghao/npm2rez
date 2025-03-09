@@ -1,37 +1,59 @@
 [build-system]
-requires = ["hatchling>=1.18.0"]
-build-backend = "hatchling.build"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "npm2rez"
 version = "0.0.1"
 description = "Convert npm packages to rez packages"
-authors = [
-    {name = "longhao", email = "hal.long@outlook.com"}
-]
+authors = ["longhao <hal.long@outlook.com>"]
 readme = "README.md"
-requires-python = ">=3.8"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
-dependencies = []
+packages = [{include = "npm2rez"}]
 
-[project.scripts]
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^1.7.0"
+nox = "^2023.4.22"
+virtualenv = "<20.25.0"
+pytest = "^7.0.0"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.1"
+ruff = "^0.1.0"
+isort = "^5.12.0"
+pre-commit = "^3.5.0"
+autoflake = "^2.2.1"
+
+[tool.poetry.scripts]
 npm2rez = "npm2rez.cli:main"
 
-[project.urls]
+[tool.poetry.urls]
 Homepage = "https://github.com/loonghao/npm2rez"
 Issues = "https://github.com/loonghao/npm2rez/issues"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/npm2rez"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-    "src/npm2rez",
-    "tests",
-    "README.md",
-    "LICENSE",
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+tag_format = "v$version"
+version_files = [
+    "pyproject.toml:version",
+    "npm2rez/__init__.py"
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+ignore = ["E203"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["npm2rez"]

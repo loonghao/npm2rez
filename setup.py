@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
-import io
 
 from setuptools import setup
 
@@ -9,7 +7,7 @@ setup(
     name="npm2rez",
     version="0.0.1",
     description="Convert npm packages to rez packages",
-    long_description=io.open("README.md", encoding="utf-8").read(),
+    long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     author="Hal Long",
     author_email="hal.long@outlook.com",
