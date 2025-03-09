@@ -56,7 +56,7 @@ jobs:
   # 单独的作业用于真实包测试，只在 Python 3.10 上运行
   real-package-tests:
     # 只在 Python 3.10 和 Ubuntu 上运行真实包测试
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 15  # 设置超时时间为15分钟
     steps:
       - name: Checkout
