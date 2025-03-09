@@ -1,3 +1,9 @@
+## 0.2.1 (2025-03-09)
+
+### Refactor
+
+- fix publish to pipy
+
 ## 0.2.0 (2025-03-09)
 
 ### Refactor

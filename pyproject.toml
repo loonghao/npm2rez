@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "npm2rez"
-version = "0.2.0"
+version = "0.2.1"
 description = "Convert npm packages to rez packages"
 authors = ["longhao <hal.long@outlook.com>"]
 readme = "README.md"
@@ -34,7 +34,7 @@ Issues = "https://github.com/loonghao/npm2rez/issues"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.2.0"
+version = "0.2.1"
 tag_format = "$version"
 version_files = [
     "pyproject.toml:version",
