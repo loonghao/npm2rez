@@ -12,6 +12,7 @@ packages = [{include = "npm2rez"}]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0"
+click = "^8.1.8"
 
 [tool.poetry.group.dev.dependencies]
 poetry = "^1.7.0"
@@ -46,6 +47,10 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
+
+# 确保 isort 配置与 ruff.lint.isort 配置一致
+[tool.isort]
+known_first_party = ["npm2rez"]
 
 [tool.ruff]
 line-length = 100

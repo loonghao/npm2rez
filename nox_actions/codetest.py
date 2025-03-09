@@ -10,7 +10,7 @@ from nox_actions.utils import PACKAGE_NAME, THIS_ROOT
 def pytest(session: nox.Session) -> None:
     """Run basic unit tests without real package installation."""
     session.install(".")
-    session.install("pytest", "pytest-cov", "pytest-mock")
+    session.install("pytest", "pytest-cov", "pytest-mock", "pyfakefs")
     test_root = os.path.join(THIS_ROOT, "tests")
     session.run(
         "pytest",
@@ -25,7 +25,7 @@ def pytest(session: nox.Session) -> None:
 def pytest_real_packages(session: nox.Session) -> None:
     """Run tests that involve real npm package installation."""
     session.install(".")
-    session.install("pytest")
+    session.install("pytest", "pyfakefs")
     test_root = os.path.join(THIS_ROOT, "tests")
     session.run(
         "pytest",

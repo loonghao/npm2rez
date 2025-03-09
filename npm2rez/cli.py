@@ -1,59 +1,123 @@
+#!/usr/bin/env python
 
 """
-Command-line interface for npm2rez - A tool to convert Node.js packages to rez packages
+Command line interface for npm2rez
 """
 
-import argparse
-import os
+import sys
+from types import SimpleNamespace
 
-from npm2rez.core import create_package
+import click
+
+from npm2rez.core import create_package, extract_node_package
 
 
-def parse_args():
-    """Parse command line arguments"""
-    parser = argparse.ArgumentParser(description="Convert Node.js package to rez package")
-    parser.add_argument("--name", required=True, help="Package name")
-    parser.add_argument("--version", required=True, help="Package version")
-    parser.add_argument(
-        "--source",
-        default="npm",
-        choices=["npm", "github"],
-        help="Package source (npm or github)"
+@click.group()
+def cli():
+    """npm2rez - Convert npm packages to rez packages"""
+
+
+@cli.command()
+@click.option("--name", required=True, help="Name of the npm package")
+@click.option("--version", required=True, help="Version of the npm package")
+@click.option(
+    "--source",
+    default="npm",
+    type=click.Choice(["npm", "github"]),
+    help="Source to install from (npm or github)",
+)
+@click.option(
+    "--repo",
+    help="GitHub repository (required when source=github)",
+)
+@click.option(
+    "--output",
+    default="./rez-packages",
+    help="Output directory for the rez package",
+)
+@click.option(
+    "--node-version",
+    default="16",
+    help="Node.js version to use",
+)
+def create(name, version, source, repo, output, node_version):
+    """Create a rez package from an npm package"""
+    # Validate GitHub source arguments
+    if source == "github" and not repo:
+        click.echo("Error: When using github source, --repo is required")
+        return 1
+
+    # Create args object to pass to create_package
+    args = SimpleNamespace(
+        name=name,
+        version=version,
+        source=source,
+        repo=repo,
+        output=output,
+        node_version=node_version,
+        _is_test=False
     )
-    parser.add_argument(
-        "--repo",
-        help="GitHub repository (format: user/repo), required when source=github"
+
+    try:
+        package_dir = create_package(args)
+        click.echo(f"Created package at: {package_dir}")
+        return 0
+    except Exception as e:
+        click.echo(f"Error creating package: {str(e)}")
+        return 1
+
+
+@cli.command()
+@click.option("--name", required=True, help="Name of the npm package")
+@click.option("--version", required=True, help="Version of the npm package")
+@click.option(
+    "--source",
+    default="npm",
+    type=click.Choice(["npm", "github"]),
+    help="Source to install from (npm or github)",
+)
+@click.option(
+    "--repo",
+    help="GitHub repository (required when source=github)",
+)
+@click.option(
+    "--output",
+    default="./node_modules",
+    help="Output directory for the node modules",
+)
+def extract(name, version, source, repo, output):
+    """Extract a Node.js package without creating a rez package"""
+    # Validate GitHub source arguments
+    if source == "github" and not repo:
+        click.echo("Error: When using github source, --repo is required")
+        return 1
+
+    # Create args object to pass to extract_node_package
+    args = SimpleNamespace(
+        name=name,
+        version=version,
+        source=source,
+        repo=repo,
+        _is_test=False
     )
-    parser.add_argument("--output", default="./rez-packages", help="Output directory")
-    parser.add_argument("--node-version", default="16", help="Node.js version requirement")
-    args = parser.parse_args()
 
-    if args.source == "github" and not args.repo:
-        parser.error("GitHub repository is required when using source=github")
-
-    return args
+    try:
+        result = extract_node_package(args, output)
+        if result:
+            click.echo(f"Successfully extracted package to: {output}")
+            return 0
+        else:
+            click.echo(f"Failed to extract package to: {output}")
+            return 1
+    except Exception as e:
+        click.echo(f"Error extracting package: {str(e)}")
+        return 1
 
 
 def main():
-    """Main entry point"""
-    args = parse_args()
-
-    # Convert package name to rez compatible format (use underscore instead of hyphen)
-    rez_name = args.name.replace("-", "_").replace("@", "").replace("/", "_")
-
-    # Create output directory
-    output_dir = os.path.abspath(args.output)
-    package_dir = os.path.join(output_dir, rez_name, args.version)
-    os.makedirs(package_dir, exist_ok=True)
-
-    print(f"Creating rez package: {rez_name}-{args.version}")
-
-    # Create package
-    package_dir = create_package(args)
-
-
-    print(f"\nDone! Rez package created: {package_dir}")
+    """Main entry point for npm2rez"""
+    return cli()
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
