@@ -64,17 +64,16 @@ uvx npm2rez --name typescript --version 4.9.5 --source github --repo microsoft/T
 | `--node-version` | Node.js version requirement | 16 |
 | `--global` | Install package globally | False |
 | `--install` | Install package after creation | False |
-| `--bin-name` | Name of the executable file | None |
 
 ## Examples
 
 ### Creating a TypeScript Package
 
 ```bash
-npm2rez --name typescript --version 4.9.5 --bin-name tsc
+npm2rez --name typescript --version 4.9.5
 ```
 
-This will create a rez package for TypeScript version 4.9.5 with the executable `tsc`.
+This will create a rez package for TypeScript version 4.9.5.
 
 ### Using the Created Package
 
