@@ -33,15 +33,6 @@ npm2rez = "npm2rez.cli:main"
 Homepage = "https://github.com/loonghao/npm2rez"
 Issues = "https://github.com/loonghao/npm2rez/issues"
 
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "0.3.0"
-tag_format = "$version"
-version_files = [
-    "pyproject.toml:version",
-    "npm2rez/__init__.py"
-]
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = "test_*.py"
